@@ -1,69 +1,74 @@
 #include <stdio.h>
 
-// Function declarations
-float add(float a, float b);
-float subtract(float a, float b);
-float multiply(float a, float b);
-float divide(float a, float b);
+// Function to add two numbers
+float add(float num1, float num2) {
+    return num1 + num2;
+}
+
+// Function to subtract two numbers
+float subtract(float num1, float num2) {
+    return num1 - num2;
+}
+
+// Function to multiply two numbers
+float multiply(float num1, float num2) {
+    return num1 * num2;
+}
+
+// Function to divide two numbers
+float divide(float num1, float num2) {
+    if (num2 != 0) {
+        return num1 / num2;
+    } else {
+        printf("Error: Division by zero!\n");
+        return 0; // Returning 0 for simplicity in case of division by zero
+    }
+}
+
+// Function to calculate the factorial of a non-negative integer
+int factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
 
 int main() {
-    float num1, num2, result;
+    float num1, num2;
     char operator;
 
-    // Input
+    // Get input from the user
     printf("Enter first number: ");
     scanf("%f", &num1);
 
-    printf("Enter operator (+, -, *, /): ");
-    scanf(" %c", &operator);
+    printf("Enter operator (+, -, *, /, !): ");
+    scanf(" %c", &operator); // Note the space before %c to consume any leading whitespace
 
-    printf("Enter second number: ");
-    scanf("%f", &num2);
-
-    // Perform calculation based on operator
+    // Perform the calculation based on the operator
     switch (operator) {
         case '+':
-            result = add(num1, num2);
+            printf("%.2f + %.2f = %.2f\n", num1, num2, add(num1, num2));
             break;
         case '-':
-            result = subtract(num1, num2);
+            printf("%.2f - %.2f = %.2f\n", num1, num2, subtract(num1, num2));
             break;
         case '*':
-            result = multiply(num1, num2);
+            printf("%.2f * %.2f = %.2f\n", num1, num2, multiply(num1, num2));
             break;
         case '/':
-            // Check for division by zero
-            if (num2 != 0) {
-                result = divide(num1, num2);
+            printf("%.2f / %.2f = %.2f\n", num1, num2, divide(num1, num2));
+            break;
+        case '!':
+            if (num1 >= 0) {
+                printf("%.0f! = %d\n", num1, factorial((int)num1));
             } else {
-                printf("Error: Division by zero\n");
-                return 1; // Exit program with an error code
+                printf("Error: Factorial is undefined for negative numbers.\n");
             }
             break;
         default:
-            printf("Invalid operator\n");
-            return 1; // Exit program with an error code
+            printf("Error: Invalid operator\n");
     }
 
-    // Output the result
-    printf("Result: %.2f\n", result);
-
-    return 0; // Exit program successfully
-}
-
-// Function definitions
-float add(float a, float b) {
-    return a + b;
-}
-
-float subtract(float a, float b) {
-    return a - b;
-}
-
-float multiply(float a, float b) {
-    return a * b;
-}
-
-float divide(float a, float b) {
-    return a / b;
+    return 0;
 }
